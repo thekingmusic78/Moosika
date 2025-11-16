@@ -12,6 +12,16 @@ def downAudio(url, destino='downs'):
             'format': 'bestaudio/best',
             'outtmpl': os.path.join(carpeta_salida, '%(title)s.%(ext)s'),  # Guarda con el título del video
             'ffmpeg_location': r'C:\ffmpeg\bin',
+            'extractor_args': {
+                'youtube': {
+                    'player_client': ['android', 'ios', 'web'],
+                    'skip': ['hls', 'dash']
+                }
+            },
+            'http_headers': {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'Accept-Language': 'en-US,en;q=0.9',
+            },
             'postprocessors': [
                 {   # Extrae el audio
                     'key': 'FFmpegExtractAudio',
@@ -20,6 +30,8 @@ def downAudio(url, destino='downs'):
                 }
             ],
             'quiet': False  # Puedes poner True si no quieres ver detalles
+            'nocheckcertificate': True,
+            'no_warnings': False,
         }
         
         
